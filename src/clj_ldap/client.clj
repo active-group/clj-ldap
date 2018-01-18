@@ -132,10 +132,11 @@
 
 (defn- connection-options
   "Returns a LDAPConnectionOptions object"
-  [{:keys [connect-timeout timeout]}]
+  [{:keys [connect-timeout timeout follow-referrals]}]
   (let [opt (LDAPConnectionOptions.)]
     (when connect-timeout (.setConnectTimeoutMillis opt connect-timeout))
     (when timeout         (.setResponseTimeoutMillis opt timeout))
+    (when follow-referrals (.setFollowReferrals opt follow-referrals))
     opt))
 
 (defn- create-ssl-context
